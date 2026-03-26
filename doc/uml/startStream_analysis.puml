@@ -1,0 +1,25 @@
+@startuml
+
+participant jpeg_stream
+participant bayer2yuv_stream
+participant visual_stream
+
+jpeg_stream -> jpeg_stream : 自身引用计数+1
+jpeg_stream --> bayer2yuv_stream : 如果首次运行，则注册回调接口，\n可通过回调接口获得前端流输出数据
+jpeg_stream -> bayer2yuv_stream : 执行前端流StartStream()
+
+bayer2yuv_stream -> bayer2yuv_stream : 自身引用计数+1
+bayer2yuv_stream --> visual_stream : 如果首次运行，则注册回调接口，\n可通过回调接口获得前端流输出数据
+bayer2yuv_stream -> visual_stream : 执行前端流StartStream()
+
+visual_stream -> visual_stream : 自身引用计数+1
+visual_stream -> visual_stream : 初始化相机，开启相机采集，此时刻，相机才会输出图像给后端
+visual_stream -> visual_stream : 获取相机属性，初始化stream_para;
+
+visual_stream -> bayer2yuv_stream : 获取stream_para结构，初始化自身
+bayer2yuv_stream -> bayer2yuv_stream : 初始化特有功能，Initialization();
+
+bayer2yuv_stream -> jpeg_stream : 获取stream_para结构，初始化自身
+jpeg_stream -> jpeg_stream : 初始化特有功能，Initialization();
+
+@enduml

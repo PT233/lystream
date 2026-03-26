@@ -1,0 +1,24 @@
+@startuml
+
+component VisualStream
+card CameraPara
+CameraPara-[dashed]->VisualStream
+VisualStream-[dashed]->CameraPara
+VisualStream-->其他业务1
+VisualStream-->[ImageStream]
+[VisualStream]-->[AlgoStream]
+
+card 算子组件1 [
+光条提取算子1
+----
+光条提取算子2
+]
+
+算子组件1-[dotted]->[AlgoStream]
+[AlgoStream]-[dotted]->算子组件1
+ImageStream--> [Jpeg编码流]
+[Jpeg编码流] -->其他业务2
+
+[AlgoStream]-->其他业务3
+
+@enduml

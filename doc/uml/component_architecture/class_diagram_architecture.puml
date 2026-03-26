@@ -1,0 +1,45 @@
+@startuml
+
+title lystream框架库类图总汇
+
+abstract Stream
+
+package "顶层前端流" {
+    Stream <|-- VisualStream
+    Stream <|-- VirtualStream
+    Stream <|-- InfraredStream
+}
+
+package "前端流和后端流" {
+    abstract StreamControl
+    Stream <|-- StreamControl
+    StreamControl <|-- ImageStream
+    StreamControl <|-- JpegStream
+    StreamControl <|-- AlgoStream
+    StreamControl <|-- VideoStream
+}
+
+package "算法处理算子" {
+    abstract Algorithm
+    AlgoStream *-- Algorithm
+    Algorithm <|-- diyAlgorithm1
+    Algorithm <|-- diyAlgorithm2
+}
+
+package "Video处理算子" {
+    abstract VideoHandle
+    VideoStream *-- VideoHandle
+    VideoHandle <|-- diyVideoHandle1
+    VideoHandle <|-- diyVideoHandle2
+}
+
+package "图像处理算子" {
+    abstract ImageHandle
+    ImageStream *-- ImageHandle
+    ImageHandle <|-- Bayer2YUV420
+    ImageHandle <|-- Bayer2YUV420withResize
+    ImageHandle <|-- Gray2YUV420
+    ImageHandle <|-- Gray2YUV420withResize
+}
+
+@enduml

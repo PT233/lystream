@@ -1,0 +1,32 @@
+@startuml
+
+participant DataTransferCall
+participant StreamDataDeque内存池1
+participant StreamDataDeque内存池2
+participant DataHandle线程1
+participant DataHandle线程2
+participant Bayer2YUV420算子1
+participant Bayer2YUV420算子2
+participant 后端流
+
+DataTransferCall -> DataTransferCall : 回调收到前端流的数据，判断给哪个内存池
+DataTransferCall -> StreamDataDeque内存池1
+
+StreamDataDeque内存池1 -> StreamDataDeque内存池1 : 内存池有数据
+StreamDataDeque内存池1 -> DataHandle线程1 : 处理线程取出数据
+
+DataHandle线程1 -> Bayer2YUV420算子1 : 数据交给图像处理算子
+Bayer2YUV420算子1 -> Bayer2YUV420算子1 : 进行处理
+Bayer2YUV420算子1 -> DataHandle线程1 : 处理结果返回
+DataHandle线程1 -> 后端流 : 数据回调给后端流
+
+
+DataTransferCall -> StreamDataDeque内存池2
+StreamDataDeque内存池2 -> StreamDataDeque内存池2 : 内存池有数据
+StreamDataDeque内存池2 -> DataHandle线程2 : 处理线程取出数据
+DataHandle线程2 -> Bayer2YUV420算子2 : 数据交给图像处理算子
+Bayer2YUV420算子2 -> Bayer2YUV420算子2 : 进行处理
+Bayer2YUV420算子2 -> DataHandle线程2 : 处理结果返回
+DataHandle线程2 -> 后端流 : 数据回调给后端流
+
+@enduml

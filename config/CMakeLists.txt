@@ -1,0 +1,5 @@
+if (CMAKE_BUILD_TYPE STREQUAL "Release")
+    file(GLOB_RECURSE CURRENT_HEADER LIST_DIRECT false RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.yaml)
+    install(FILES ${CURRENT_HEADER} DESTINATION ${CMAKE_INSTALL_CONFIG})
+    install(FILES lystream.conf DESTINATION /etc/ld.so.conf.d/)
+endif ()

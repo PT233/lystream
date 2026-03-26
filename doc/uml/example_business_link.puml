@@ -1,0 +1,23 @@
+@startuml
+
+component VisualStream
+card CameraPara
+CameraPara-[dashed]->VisualStream
+VisualStream-[dashed]->CameraPara
+VisualStream-->统计相机FPS
+VisualStream-->[ImageStream1]
+
+card 算子组件1 [
+Bayer2YUV420算子1
+----
+Bayer2YUV420算子2
+]
+
+算子组件1-[dotted]->[ImageStream1]
+[ImageStream1]-[dotted]->算子组件1
+ImageStream1--> [Jpeg编码流]
+[Jpeg编码流] -->TCP2端口发送和FPS统计
+
+[ImageStream1]-->TCP1端口发送和FPS统计
+
+@enduml

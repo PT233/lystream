@@ -1,0 +1,31 @@
+@startuml
+
+card Jpeg编码参数
+card Video编码参数机制
+
+package "可见光相机2" {
+    card 相机参数2
+    component 可将光相机数据流2
+    相机参数2-[dashed]->可将光相机数据流2
+    可将光相机数据流2-[dashed]->相机参数2
+
+    card 算子组件4 [
+    DIY图像处理算子3
+    ----
+    DIY图像处理算子3
+    ]
+    算子组件4-[dashed]->[图像处理流3]
+    [图像处理流3]-[dashed]->算子组件4
+    可将光相机数据流2->[图像处理流3]
+    [图像处理流3]->业务端点7
+    [图像处理流3]-->[Jpeg编码流2]
+    [Jpeg编码流2]-[dotted]->Jpeg编码参数
+    Jpeg编码参数-[dotted]->[Jpeg编码流2]
+    [Jpeg编码流2]-->业务端点8
+    [Video编码流2]-[dotted]->Video编码参数机制
+    Video编码参数机制-[dotted]->[Video编码流2]
+    [图像处理流3]-->[Video编码流2]
+    [Video编码流2]-->业务端点9
+}
+
+@enduml

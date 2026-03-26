@@ -1,0 +1,59 @@
+@startuml
+class ImageStream {
+    + void addHandle(ImageHandle *handle);
+    - void Initialization();
+    - void DataHandle(unsigned int index);
+    - imagestream::StreamCtrl stream_ctrl_;
+    - imagestream::StreamData stream_data_;
+}
+
+class ImageHandle {
+    + explicit ImageHandle(ImgSize size);
+    + virtual void ImageProcessing(void *indata, void **outdata) = 0;
+    - ImgData img_data_ {};
+}
+
+class Bayer2YUV420 {
+
+}
+
+class Bayer2YUV420withResize {
+
+}
+
+
+ImageStream <|-- Bayer2YUV420
+ImageStream <|-- Bayer2YUV420withResize
+
+struct ImgData {
+    + ImgSize size;
+    + unsigned char *plane[3];
+}
+
+ImageHandle *-- ImgData
+
+struct StreamBuffer {
+    + unsigned char *rawdata; ///< 原始数据指针
+    + unsigned char *aligndata; ///< 内存对其后的数据指针
+    + StreamDataDeque *data_queue; ///< 数据缓存
+}
+
+struct StreamCtrl {
+    + std::mutex mtx; ///< 互斥锁
+    + bool isready = false; ///< 初始化成功标识
+    + vector<std::thread> handle_th; ///< 处理线程句柄
+    + unsigned handle_sum = 0; ///< 处理线程统计
+    + unsigned int loop_count = 0; ///< 循环处理索引
+}
+
+struct StreamData {
+    + vector<ImageHandle *> handle; ///< 图像处理句柄
+    + vector<StreamBuffer> buffer; ///< 图像处理缓冲
+}
+
+StreamData *-- StreamBuffer
+ImageStream *-- StreamCtrl
+ImageStream *-- StreamData
+ImageStream *-- ImageHandle
+
+@enduml

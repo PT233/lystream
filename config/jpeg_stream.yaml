@@ -1,0 +1,12 @@
+# JpegStream Config file
+
+JpegEncodePara :
+    level : 75
+    scale :
+        width : 0
+        height : 0
+    roi :
+        offset_x : 0
+        offset_y : 0
+        offset_width : 0
+        offset_height : 0

@@ -1,0 +1,40 @@
+@startuml
+
+abstract Stream
+
+
+package "顶层前端流" {
+    Stream <|-- VisualStream
+    Stream <|-- VirtualStream
+    Stream <|-- InfraredStream
+}
+
+package "前端流和后端流" {
+    abstract StreamControl
+    Stream <|-- StreamControl
+    StreamControl <|-- ImageStream
+    StreamControl <|-- JpegStream
+    StreamControl <|-- AlgoStream
+    StreamControl <|-- VideoStream
+}
+
+package "算法处理算子" {
+    abstract Algorithm
+    AlgoStream *-- Algorithm
+}
+
+package "Video处理算子" {
+    abstract VideoHandle
+    VideoStream *-- VideoHandle
+}
+
+package "图像处理算子" {
+    abstract ImageHandle
+    ImageStream *-- ImageHandle
+    ImageHandle <|-- Bayer2YUV420
+    ImageHandle <|-- Bayer2YUV420withResize
+    ImageHandle <|-- Gray2YUV420
+    ImageHandle <|-- Gray2YUV420withResize
+}
+
+@enduml

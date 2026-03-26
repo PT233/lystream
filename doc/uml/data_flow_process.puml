@@ -1,0 +1,28 @@
+@startuml
+
+participant visual_stream
+participant bayer2yuv_stream
+participant jpeg_stream
+participant other
+
+loop 相机采集
+visual_stream -> visual_stream : 相机采集
+visual_stream -> bayer2yuv_stream : 回调提供CameraData数据
+bayer2yuv_stream -> bayer2yuv_stream : 加入数据队列
+bayer2yuv_stream -> visual_stream : 回调返回
+end
+
+loop 图像处理
+bayer2yuv_stream -> bayer2yuv_stream : 持续图像处理
+bayer2yuv_stream -> jpeg_stream : 回调提供ImgData数据
+jpeg_stream -> jpeg_stream : 加入数据队列
+jpeg_stream -> bayer2yuv_stream : 回调返回
+end
+
+loop Jpeg编码
+jpeg_stream -> jpeg_stream : 持续Jpeg编码
+jpeg_stream -> other : 回调提供JpegData数据
+other -> other : 数据取出，或者做其他业务
+other -> jpeg_stream : 回调返回
+end
+@enduml

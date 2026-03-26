@@ -1,0 +1,64 @@
+# Visual Camera Config file
+
+# 此配置文件作为配置相机参数的备选方案
+
+CameraSettingPara :
+    # 设置使能
+    Enable : false
+
+    # 厂商名称
+    DeviceVendorName : MV-CH089-10UC
+
+    # 设备型号
+    DeviceModelName : MV-CS050-10UC
+
+    # 设备固件版本
+    DeviceFirmwareVersion : V1.6.3 201222,20112502
+
+    # 设备序列号
+    DeviceSerialNumber : 00DA1099728
+
+    # 相机图像类型
+    CameraType : Color
+
+    # 相机图像ROI
+    CameraRoi : [ 4096, 2160, 0, 0 ]
+    # 第一个元素：Width, 第二个元素：Height
+    # 第三个元素：OffsetX, 第四个元素：OffsetY
+    
+    # 触发模式
+    TriggerMode : Off
+    # 枚举值："Off"、"On"
+
+    # 触发源
+    TriggerSource : Line0
+    # 枚举值："Software"、"Line0"、"Line1"、"Line2"
+
+    # 镜像
+    Mirror : [ false, false ]
+    # 第一个元素：ReverseX，第二个元素：ReverseY
+
+    # 曝光时间
+    ExposureTime : 60
+
+    # 自动曝光
+    ExposureAuto : Off
+
+    # 自动曝光限制
+    ExposureLimit : [ 15, 30450 ]
+    # 第一个元素：自动曝光最小值，第二个元素：自动曝光最大值
+
+    # 增益
+    GainRegular : 0
+
+    # 自动增益
+    GainAuto : Off
+    # 枚举值："Off"、"Once"、"Continous"
+
+    # 自动增益限制
+    GainLimit : [ 0, 20.0322 ]
+    # 第一个元素：自动增益最小值，第二个元素：自动增益最大值
+
+    # 自动白平衡
+    BalanceWhiteAuto : Off
+    # 枚举值："Off"、"Once"、"Continous"

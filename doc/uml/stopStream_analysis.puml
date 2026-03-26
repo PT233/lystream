@@ -1,0 +1,20 @@
+@startuml
+
+participant jpeg_stream
+participant bayer2yuv_stream
+participant visual_stream
+
+jpeg_stream -> jpeg_stream : 自身引用计数-1
+jpeg_stream -> bayer2yuv_stream : 执行前端流StopStream()
+
+bayer2yuv_stream -> bayer2yuv_stream : 自身引用计数-1
+bayer2yuv_stream -> visual_stream : 执行前端流StopStream()
+
+visual_stream -> visual_stream : 自身引用计数-1
+visual_stream -> visual_stream : 如果自身引用计数为0，则关闭相机，释放资源
+
+bayer2yuv_stream -> bayer2yuv_stream : 如果自身引用计数为0，则关闭功能流
+
+jpeg_stream -> jpeg_stream : 如果自身引用计数为0，则关闭功能流
+
+@enduml

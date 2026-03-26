@@ -1,0 +1,47 @@
+@startuml
+
+abstract Stream {
+    # StreamPara stream_para_ {}; ///< 流属性
+    # std::atomic<bool> isrun_ {false}; ///< 流处理状态标识
+    # std::vector<std::function<void(void *data)>> ondata_list_ {}; ///< 流数据输出回调数组
+    + virtual void StartStream() = 0;
+    + virtual void StopStream() = 0;
+    + StreamPara getStreamPara();
+    + void DataTransfer(const std::function<void(void *data)> &ondata);
+}
+
+class VisualStream {
+    + void WriteCameraPara(CameraPara &para) const;
+    + CameraPara ReadCameraPara();
+    - shared_ptr<CameraDevice> device_ = nullptr; ///< 相机操作句柄
+    - CameraPara device_para_ = {}; ///< 相机参数结构
+    - bool first_run_ = true; ///< 第一次调用标识
+}
+
+class StreamControl {
+    + explicit StreamControl(Stream *stream, PolicyMode mode = PolicyMode::ExecutePerFrame, unsigned int fps = 0);
+    # StreamTimeTick time_tick_; ///< 时间控制信息，当处于间隔执行时才启用
+    # PolicyMode execute_mode_; ///< 执行策略
+    - Stream *stream_; ///< 前端流
+    - bool first_run_ = true; ///< 第一次调用标识
+}
+
+class ImageStream {
+    + explicit ImageStream(Stream *stream, PolicyMode mode = PolicyMode::ExecutePerFrame, unsigned int fps = 0);
+    + void addHandle(ImageHandle *handle);
+    - Stream *stream_; ///< 前端流
+    - bool first_run_ = true; ///< 第一次调用标识
+}
+
+class JpegStream {
+    + explicit JpegStream(Stream *stream, PolicyMode mode = PolicyMode::ExecutePerFrame, unsigned int fps = 0);
+    - Stream *stream_; ///< 前端流
+    - bool first_run_ = true; ///< 第一次调用标识
+}
+
+Stream <|-- VisualStream
+Stream <|-- StreamControl
+StreamControl <|-- ImageStream
+StreamControl <|-- JpegStream
+
+@enduml

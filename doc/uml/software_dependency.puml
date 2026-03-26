@@ -1,0 +1,21 @@
+@startuml
+@startmindmap
+* lystream框架依赖
+** lynppi库
+*** cuda原生库，支持2种算计能力的零拷贝
+*** 扩展性高，性能高，目前仅仅运行在GPU
+
+** lyboost库
+*** Boost库的二次开发库，封装了常用的开发功能
+*** lystream仅使用了日志库(log)，工程应用中可直接开箱即用其他功能库
+
+** lycodec库
+*** Multimedia API封装的编解码库，能引擎加速
+*** Jpeg编解码和Video编解码，开放了绝大多数编解码参数
+
+** lycamera库
+*** 支持6款相机，统一相机操作接口
+@endmindmap
+
+
+@enduml

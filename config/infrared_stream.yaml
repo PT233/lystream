@@ -1,0 +1,7 @@
+# Infrared Camera Config file
+
+# 此配置文件作为配置相机参数的备选方案
+
+CameraSettingPara :
+    # 设置发射率，数值在0~1之间，float类型
+    Emissivity : 0.98

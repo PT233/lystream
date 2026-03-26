@@ -1,0 +1,31 @@
+include_directories(
+        "../"
+)
+
+add_executable(visual_stream_test visual_stream_test.cpp)
+add_executable(image_stream_test image_stream_test.cpp)
+add_executable(jpeg_stream_test jpeg_stream_test.cpp)
+add_executable(video_stream_test video_stream_test.cpp)
+add_executable(infrared_stream_test infrared_stream_test.cpp)
+add_executable(virtual_stream_test virtual_stream_test.cpp)
+add_executable(rotateC1_test rotateC1_test.cpp)
+#add_executable(ffmpeg_test ffmpeg_test.cpp)
+
+target_link_libraries(visual_stream_test lystream pthread)
+target_link_libraries(image_stream_test lystream pthread)
+target_link_libraries(jpeg_stream_test lystream pthread)
+target_link_libraries(video_stream_test lystream pthread)
+target_link_libraries(infrared_stream_test lystream pthread)
+target_link_libraries(virtual_stream_test lystream pthread)
+target_link_libraries(rotateC1_test lystream pthread)
+#target_link_libraries(ffmpeg_test avformat avutil avcodec pthread)
+
+if (CMAKE_BUILD_TYPE STREQUAL "Release")
+    install(TARGETS visual_stream_test RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(TARGETS image_stream_test RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(TARGETS jpeg_stream_test RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(TARGETS video_stream_test RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(TARGETS infrared_stream_test RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(TARGETS virtual_stream_test RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(TARGETS rotateC1_test RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+endif ()

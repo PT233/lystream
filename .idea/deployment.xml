@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="调试板 (d78859b5-f5d0-4fa3-86f1-da13c88aea69)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/root/lystream" local="$PROJECT_DIR$" />
+            <mapping deploy="/tmp/lystream_debug" local="$PROJECT_DIR$/../../../../Output_Compile/lystream_debug" />
+            <mapping deploy="/tmp/lystream_release" local="$PROJECT_DIR$/../../../../Output_Compile/lystream_release" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/../../../Output_Compile/lystream_debug" />
+            <excludedPath local="true" path="$PROJECT_DIR$/../../../../Output_Compile/lystream_debug" />
+            <excludedPath local="true" path="$PROJECT_DIR$/../../../../Output_Compile/lystream_debug" />
+            <excludedPath local="true" path="$PROJECT_DIR$/../../../Output_Compile/lystream_release" />
+            <excludedPath local="true" path="$PROJECT_DIR$/../../../../Output_Compile/lystream_release" />
+            <excludedPath local="true" path="$PROJECT_DIR$/../../../../Output_Compile/lystream_release" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

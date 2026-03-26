@@ -1,0 +1,37 @@
+# VideoStream Config file
+
+# 配置此文件需要基本的视频知识
+
+VideoEncodePara :
+    type : H264      # 编码类型，枚举有：H264，H265
+    fps : 30         # 视频帧率，流畅度最低25
+    bitrate : 0      # 当为恒码率时，表示码流大小，当为变码率时，表示峰值码流大小; 0值表示根据分辨率自动调整
+    ratemode : cbr   # 速率模式，vbr为变码率，cbr为恒码率
+
+    # H264和H265一些参数配置不同
+    H264Para :
+        profile : high   # Profile等级，枚举有：baseline，main，high，high444，主流为main，高画质为high
+        level : 5.1      # 编码等级，H264支持的有：
+        # 1.0, 1b, 1.1, 1.2, 1.3
+        # 2.0, 2.1, 2.2
+        # 3.0, 3.1, 3.2
+        # 4.0, 4.1, 4.2
+        # 5.0, 5.1
+
+    H265Para :
+        profile : main   # Profile等级，枚举有：main, main10
+        level : main5.1  # 编码等级，H265支持的有：
+        # main1.0, high1.0, main2.0, high2.0
+        # main2.1, high2.1, main3.0, high3.0
+        # main3.1, high3.1, main4.0, high4.0
+        # main4.1, high4.1, main5.0, high5.0
+        # main5.1, high5.1, main5.2, high5.2
+        # main6.0, high6.0, main6.1, high6.1
+        # main6.2, high6.2
+
+
+    iframeinterval : 10    # I帧间隔，关键帧间隔，实时流建议30以内
+    idrinterval : 30       # IDR帧间隔
+    insertaud : false      # 是否开启AUD帧
+    alliframe : false      # 是否开启全部I帧
+    maxperf : true         # 性能模式，true：打开，false：关闭
